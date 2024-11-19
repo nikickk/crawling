@@ -22,26 +22,35 @@ time.sleep(5)  # 스크롤 후 대기 (데이터 로드 시간)
 
 
 # 버튼 찾고 클릭
-# try:
-#     load_more_button = WebDriverWait(driver, 10).until(
-#         EC.element_to_be_clickable((By.CLASS_NAME, 'nds-btn mb12-sm css-2lnvjn ex41m6f0 cta-primary-dark underline btn-responsive'))
-#     )
-#     load_more_button.click()
-#     time.sleep(3)  # 버튼 클릭 후 대기 (리뷰가 로드될 시간)
-# except Exception as e:
-#     print("버튼을 찾을 수 없거나 클릭할 수 없습니다.", e)
+try:
+    # 첫 번째 버튼 클릭
+    first_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="pdp-info-accordions__reviews-accordion"]/summary'))
+    )
+    first_button.click()
+    time.sleep(3)  # 첫 번째 버튼 클릭 후 대기 (리뷰가 로드될 시간)
+    print("첫 번째 버튼 클릭 성공")
+
+    # 두 번째 버튼 클릭
+    second_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="pdp-info-accordions__reviews-accordion"]/div/div/div/button[2]'))
+    )
+    second_button.click()
+    time.sleep(3)  # 두 번째 버튼 클릭 후 대기
+    print("두 번째 버튼 클릭 성공")
+
+except Exception as e:
+    print("버튼을 찾을 수 없거나 클릭할 수 없습니다.", e)
 
 # 페이지 소스를 가져와서 BeautifulSoup로 파싱
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 
 # 리뷰 데이터 가져오기
-reviews_section = soup.find_all('div', class_='content')  # 상위 div 태그 클래스
-for div in reviews_section:
-    # div 태그 내의 p 태그 찾기
-    reviews = div.find_all('p', class_='nds-text css-qtj9g7 e1yhcai00 appearance-body1 color-primary weight-regular')
-    for review in reviews:
-        print(review.get_text())
+reviews_section = soup.find_all('span', class_='tt-c-review__text-content')
+for index, review in enumerate(reviews_section):
+    print(f"[{index}] {review.get_text()}")
+
 
 # 브라우저 종료
 driver.quit()
