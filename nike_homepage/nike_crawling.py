@@ -6,6 +6,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import time
 
+data_array=[]
+shoe_list=[]
+review_list_total=[]
+
 # Selenium WebDriver 시작
 driver = webdriver.Chrome()
 
@@ -46,6 +50,15 @@ try:
             element.click()
             time.sleep(5)  # 페이지 전환 대기
             print(f"n={n} 요소 클릭 성공")
+            
+            # 페이지 소스를 가져와서 BeautifulSoup로 파싱
+            html = driver.page_source
+            soup = BeautifulSoup(html, 'html.parser')
+            
+            # 상품명 데이터 가져오기
+            shoe_name = soup.find('h1', class_='nds-text css-1h3ryhm e1yhcai00 text-align-start appearance-title4 color-primary weight-regular')
+            print(shoe_name.text)
+            shoe_list.append(shoe_name.text)
 
             # 리뷰버튼(첫번째 버튼) 찾고 클릭 (리뷰 열기)
             first_button = WebDriverWait(driver, 3).until(
@@ -74,8 +87,14 @@ try:
 
             # 리뷰 데이터 가져오기
             reviews_section = soup.find_all('span', class_='tt-c-review__text-content')
+            review_list = []  # 리뷰를 담을 리스트
             for index, review in enumerate(reviews_section):
                 print(f"[{index}] {review.get_text()}")
+                review_list.append(review.get_text())  # 각 리뷰를 리스트로 감싸서 추가
+
+            # 리뷰 리스트를 review_list_total에 추가
+            review_list_total.append(review_list)
+                
 
         except Exception as e:
             print(f"n={n} 크롤링 중 에러 발생:", e)
@@ -93,3 +112,24 @@ except Exception as e:
 
 # 브라우저 종료
 driver.quit()
+data_array.append([shoe_list,review_list_total])
+print(data_array)
+
+import pandas as pd
+
+# 각 제품의 이름
+product_names = data_array[0][0]
+
+# 각 제품에 대한 리뷰들
+reviews_data = data_array[0][1]
+
+# 데이터프레임으로 변환
+reviews_df = pd.DataFrame(reviews_data, columns=[f'Review {i+1}' for i in range(len(reviews_data[0]))])
+
+# 제품 이름을 인덱스로 설정
+reviews_df.insert(0, 'Product', product_names)
+
+# 결과 출력
+print(reviews_df)
+
+reviews_df.to_csv("nike_homepage/shoe_reviews.csv",encoding="cp949",index=False)
