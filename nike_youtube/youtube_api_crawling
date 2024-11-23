@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 #Id = 'MOVIE_ID'
 
 comments = list()
-api_obj = build('youtube', 'v3', developerKey='MY_API_KEY')
+api_obj = build('youtube', 'v3', developerKey='')
 # 댓글수집
 response = api_obj.commentThreads().list(part='snippet,replies', videoId='VIDEO_ID', maxResults=100).execute()
 
