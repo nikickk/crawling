@@ -5,9 +5,9 @@ from googleapiclient.discovery import build
 #Id = 'MOVIE_ID'
 
 comments = list()
-api_obj = build('youtube', 'v3', developerKey='')
+api_obj = build('youtube', 'v3', developerKey='AIzaSyC48b0ITiNHkrJeXxhOeGl4Fza_K8agvRk')
 # 댓글수집
-response = api_obj.commentThreads().list(part='snippet,replies', videoId='VIDEO_ID', maxResults=100).execute()
+response = api_obj.commentThreads().list(part='snippet,replies', videoId='McS7W7UN_Nc', maxResults=100).execute()
 
 
 while response:
@@ -28,7 +28,7 @@ while response:
 
     # 댓글저장
 df = pandas.DataFrame(comments)
-df.to_csv('./test2.csv', header=['comment', 'author', 'date', 'num_likes'],encoding="utf-8-sig")
+df.to_csv('./nike_youtube_crawling.csv', header=['comment', 'author', 'date', 'num_likes'],encoding="utf-8-sig")
 
 
 # df = pandas.DataFrame(comments)
