@@ -138,4 +138,4 @@ reviews_df.insert(0, 'Product', product_names)
 # 결과 출력
 print(reviews_df)
 
-reviews_df.to_csv("nike_homepage/shoe_reviews.csv",encoding="utf-8",index=False)
+reviews_df.to_csv("nike_homepage/shoe_reviews.csv",encoding="utf-8-sig",index=False)
