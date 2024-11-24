@@ -14,15 +14,16 @@ review_list_total=[]
 driver = webdriver.Chrome()
 
 # 원래 URL
-original_url = "https://www.nike.com/kr/w/men-running-shoes-37v7jznik1zy7ok"
+original_url = "https://www.nike.com/kr/w/men-jordan-shoes-37eefznik1zy7ok"
 driver.get(original_url)
 
 # 페이지 로드 대기
-driver.implicitly_wait(5)
+driver.implicitly_wait(1)
 
 # 스크롤 내리기 (맨 아래로)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-time.sleep(5)
+time.sleep(1)
+
 
 # '//*[@id="skip-to-products"]' 하위의 div 개수 확인
 try:
@@ -44,11 +45,11 @@ try:
 
         try:
             # 해당 요소 클릭
-            element = WebDriverWait(driver, 10).until(
+            element = WebDriverWait(driver, 5).until(
                 EC.element_to_be_clickable((By.XPATH, xpath))
             )
             element.click()
-            time.sleep(5)  # 페이지 전환 대기
+            time.sleep(1)  # 페이지 전환 대기
             print(f"n={n} 요소 클릭 성공")
             
             # 페이지 소스를 가져와서 BeautifulSoup로 파싱
@@ -61,22 +62,22 @@ try:
             shoe_list.append(shoe_name.text)
 
             # 리뷰버튼(첫번째 버튼) 찾고 클릭 (리뷰 열기)
-            first_button = WebDriverWait(driver, 3).until(
+            first_button = WebDriverWait(driver, 1).until(
                 EC.element_to_be_clickable((By.XPATH, '//*[@id="pdp-info-accordions__reviews-accordion"]/summary'))
             )
             first_button.click()
-            time.sleep(3)  # 첫 번째 버튼 클릭 후 대기
+            time.sleep(1)  # 첫 번째 버튼 클릭 후 대기
             print("첫 번째 버튼 클릭 성공")
             
             # 두 번째 버튼 클릭 (없으면 건너뛰기)
             from selenium.common.exceptions import TimeoutException
 
             try:
-                second_button = WebDriverWait(driver, 3).until(
+                second_button = WebDriverWait(driver, 1).until(
                     EC.element_to_be_clickable((By.XPATH, '//*[@id="pdp-info-accordions__reviews-accordion"]/div/div/div/button[2]'))
                 )
                 second_button.click()
-                time.sleep(3)
+                time.sleep(1)
                 print("두 번째 버튼 클릭 성공")
             except TimeoutException:
                 print("두 번째 버튼이 없거나 비활성화되어 있습니다. 건너뜁니다.")
@@ -104,8 +105,13 @@ try:
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="skip-to-products"]'))
         )
-        time.sleep(5)  # 복귀 후 대기
-        print("원래 URL로 복귀 완료")
+
+        if n>24:        
+            # 복귀 후 스크롤 다시 내리기
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(2)  # 스크롤 후 대기
+            print("원래 URL로 복귀 후 스크롤 완료")
+        
 
 except Exception as e:
     print("하위 div 개수를 찾는 중 에러 발생:", e)
@@ -132,4 +138,4 @@ reviews_df.insert(0, 'Product', product_names)
 # 결과 출력
 print(reviews_df)
 
-reviews_df.to_csv("nike_homepage/shoe_reviews.csv",encoding="cp949",index=False)
+reviews_df.to_csv("nike_homepage/shoe_reviews.csv",encoding="utf-8",index=False)
