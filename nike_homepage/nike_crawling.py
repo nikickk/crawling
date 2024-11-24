@@ -82,19 +82,37 @@ try:
             except TimeoutException:
                 print("두 번째 버튼이 없거나 비활성화되어 있습니다. 건너뜁니다.")
 
-            # 페이지 소스를 가져와서 BeautifulSoup로 파싱
-            html = driver.page_source
-            soup = BeautifulSoup(html, 'html.parser')
-
-            # 리뷰 데이터 가져오기
-            reviews_section = soup.find_all('span', class_='tt-c-review__text-content')
+            
             review_list = []  # 리뷰를 담을 리스트
-            for index, review in enumerate(reviews_section):
-                print(f"[{index}] {review.get_text()}")
-                review_list.append(review.get_text())  # 각 리뷰를 리스트로 감싸서 추가
+
+            def get_review():
+                # 페이지 소스를 가져와서 BeautifulSoup로 파싱
+                html = driver.page_source
+                soup = BeautifulSoup(html, 'html.parser')
+                # 리뷰 데이터 가져오기
+                reviews_section = soup.find_all('span', class_='tt-c-review__text-content')
+                for index, review in enumerate(reviews_section):
+                    print(f"[{index}] {review.get_text()}")
+                    review_list.append(review.get_text())  # 각 리뷰를 리스트로 감싸서 추가
+                return review_list
+            # 첫장 크롤링
+            get_review()
+            for i in range(5):
+                try:
+                    next_xpath='//*[@id="tt-reviews-list"]/div/div/nav/button[2]'
+                    next_button = WebDriverWait(driver, 1).until(
+                        EC.element_to_be_clickable((By.XPATH, next_xpath))
+                    )
+                    next_button.click()
+                    time.sleep(3)
+                    print("> 버튼 클릭 성공")
+                    get_review()
+                except TimeoutException:
+                    print("> 버튼이 없거나 비활성화되어 있습니다. 건너뜁니다.")
 
             # 리뷰 리스트를 review_list_total에 추가
             review_list_total.append(review_list)
+            print(review_list_total)
                 
 
         except Exception as e:
@@ -130,7 +148,20 @@ product_names = data_array[0][0]
 reviews_data = data_array[0][1]
 
 # 데이터프레임으로 변환
-reviews_df = pd.DataFrame(reviews_data, columns=[f'Review {i+1}' for i in range(len(reviews_data[0]))])
+# reviews_df = pd.DataFrame(reviews_data, columns=[f'Review {i+1}' for i in range(len(reviews_data[0]))])
+
+# 가장 긴 행의 길이 계산
+max_columns = max(len(row) for row in reviews_data)
+
+# 모든 행의 길이를 max_columns에 맞추기
+padded_data = [row + [None] * (max_columns - len(row)) for row in reviews_data]
+
+# DataFrame 생성
+reviews_df = pd.DataFrame(
+    padded_data, 
+    columns=[f'Review {i+1}' for i in range(max_columns)]
+)
+
 
 # 제품 이름을 인덱스로 설정
 reviews_df.insert(0, 'Product', product_names)
@@ -138,4 +169,4 @@ reviews_df.insert(0, 'Product', product_names)
 # 결과 출력
 print(reviews_df)
 
-reviews_df.to_csv("nike_homepage/shoe_reviews.csv",encoding="utf-8-sig",index=False)
+reviews_df.to_csv("nike_homepage/jordan_reviews.csv",encoding="utf-8-sig",index=False)
