@@ -14,15 +14,19 @@ review_list_total=[]
 driver = webdriver.Chrome()
 
 # 원래 URL
-original_url = "https://www.nike.com/kr/w/men-jordan-shoes-37eefznik1zy7ok"
+original_url = "https://www.nike.com/kr/w/men-lifestyle-shoes-13jrmznik1zy7ok"
 driver.get(original_url)
 
 # 페이지 로드 대기
 driver.implicitly_wait(1)
 
 # 스크롤 내리기 (맨 아래로)
-driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-time.sleep(1)
+# driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+# time.sleep(1)
+# 스크롤을 여러 번 반복하며 로딩을 유도
+for _ in range(7):  # 반복 횟수는 페이지의 크기에 따라 조정
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(1)  # 로딩 대기
 
 
 # '//*[@id="skip-to-products"]' 하위의 div 개수 확인
@@ -120,7 +124,7 @@ try:
 
         # 원래 URL로 복귀 (DOM 안정화 대기)
         driver.get(original_url)
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="skip-to-products"]'))
         )
 
@@ -129,6 +133,24 @@ try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(2)  # 스크롤 후 대기
             print("원래 URL로 복귀 후 스크롤 완료")
+            
+        if n>72:
+            for _ in range(2):  # 반복 횟수는 페이지의 크기에 따라 조정
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(1)
+                
+        if n>123:
+            for _ in range(2):  # 반복 횟수는 페이지의 크기에 따라 조정
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(1)
+                
+        if n>169:
+            for _ in range(2):  # 반복 횟수는 페이지의 크기에 따라 조정
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(1) 
+        
+
+            
         
 
 except Exception as e:
@@ -169,4 +191,4 @@ reviews_df.insert(0, 'Product', product_names)
 # 결과 출력
 print(reviews_df)
 
-reviews_df.to_csv("nike_homepage/jordan_reviews.csv",encoding="utf-8-sig",index=False)
+reviews_df.to_csv("nike_homepage/lifestyle_reviews_fin2.csv",encoding="utf-8-sig",index=False)
