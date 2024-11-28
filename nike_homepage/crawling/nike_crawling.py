@@ -191,4 +191,4 @@ reviews_df.insert(0, 'Product', product_names)
 # 결과 출력
 print(reviews_df)
 
-reviews_df.to_csv("nike_homepage/lifestyle_reviews_fin2.csv",encoding="utf-8-sig",index=False)
+reviews_df.to_csv("nike_homepage/crawling_csv/lifestyle_reviews_fin2.csv",encoding="utf-8-sig",index=False)
