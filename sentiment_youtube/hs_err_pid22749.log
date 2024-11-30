@@ -1,0 +1,678 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x000000018a44be64, pid=22749, tid=259
+#
+# JRE version:  (15.0.10+5) (build )
+# Java VM: OpenJDK 64-Bit Server VM (15.0.10+5-MTS, mixed mode, tiered, compressed oops, g1 gc, bsd-aarch64)
+# Problematic frame:
+# C  [libsystem_platform.dylib+0xe64]  _platform_strlen+0x4
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=UTF8 -ea -Xmx1024m -javaagent:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/org.jpype.jar 
+
+Host: MacBookAir10,1 arm64 1 MHz, 8 cores, 8G, Darwin 22.5.0
+Time: Sat Nov 30 04:10:15 2024 KST elapsed time: 0.019369 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000011e765400):  JavaThread "Unknown thread" [_thread_in_vm, id=259, stack(0x000000016bae4000,0x000000016dae4000)]
+
+Stack: [0x000000016bae4000,0x000000016dae4000],  sp=0x000000016dae17b0,  free space=32757k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libsystem_platform.dylib+0xe64]  _platform_strlen+0x4
+V  [libjvm.dylib+0x9348bc]  VM_Version::get_os_cpu_info()+0x44
+V  [libjvm.dylib+0x933b50]  VM_Version::initialize()+0x70
+V  [libjvm.dylib+0x93399c]  VM_Version_init()+0x30
+V  [libjvm.dylib+0x3c08bc]  init_globals()+0x44
+V  [libjvm.dylib+0x8d0178]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x30c
+V  [libjvm.dylib+0x454018]  JNI_CreateJavaVM+0x78
+C  [_jpype.cpython-311-darwin.so+0x12f8c]  JPContext::startJVM(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&, bool, bool, bool)+0xcc
+C  [_jpype.cpython-311-darwin.so+0x3f6c4]  PyJPModule_startup(_object*, _object*)+0x1f8
+C  [Python+0xfda64]  cfunction_call+0x60
+C  [Python+0x99700]  _PyObject_MakeTpCall+0x80
+C  [Python+0x1bcc88]  _PyEval_EvalFrameDefault+0xcf38
+C  [Python+0x1c26ec]  _PyEval_Vector+0x9c
+C  [Python+0x99a20]  _PyObject_FastCallDictTstate+0x60
+C  [Python+0x126b28]  slot_tp_init+0xb4
+C  [Python+0x11d4a4]  type_call+0x88
+C  [Python+0x99700]  _PyObject_MakeTpCall+0x80
+C  [Python+0x1bcc88]  _PyEval_EvalFrameDefault+0xcf38
+C  [Python+0x1aeac4]  PyEval_EvalCode+0x114
+C  [Python+0x227cc8]  pyrun_file+0xf0
+C  [Python+0x227498]  _PyRun_SimpleFileObject+0x120
+C  [Python+0x226a0c]  _PyRun_AnyFileObject+0xe8
+C  [Python+0x2500b4]  pymain_run_file_obj+0xdc
+C  [Python+0x24f898]  pymain_run_file+0x48
+C  [Python+0x24f0ac]  Py_RunMain+0x724
+C  [Python+0x250230]  pymain_main+0x34
+C  [Python+0x250a68]  Py_BytesMain+0x28
+C  [dyld+0x5f28]  start+0x8bc
+
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 2 (SEGV_ACCERR), si_addr: 0x000000016bae41d0
+
+Registers:
+ x0=0x000000016bae41d0  x1=0x000000016bae41d0  x2=0x000000016dae1858  x3=0x0000000000000000
+ x4=0x0000000000000000  x5=0x0000000000000000  x6=0x000000000000004b  x7=0x0000000000000000
+ x8=0x0000000000000038  x9=0x0000000000000001 x10=0x0000000000000000 x11=0x00000001680781d0
+x12=0x000000016bbad750 x13=0x0000000000000001 x14=0x00000000ffffffff x15=0x0000000002000000
+x16=0x000000018a44be60 x17=0x00000001e9f41980 x18=0x0000000000000000 x19=0x0000000000000000
+x20=0x0000000000000000 x21=0x000000016dae1858 x22=0x000000016dae1848 x23=0x000000016bae41d0
+x24=0x000000016bbb2000 x25=0x000000016bbcfa20 x26=0x000000018a427e60 x27=0x000000016bc18000
+x28=0x000000016bc18000  fp=0x000000016dae1830  lr=0x000000018a2bca50  sp=0x000000016dae17b0
+pc=0x000000018a44be64 cpsr=0x0000000020001000
+Top of Stack: (sp=0x000000016dae17b0)
+0x000000016dae17b0:   0000000000000038 0000000300000000
+0x000000016dae17c0:   000000016dae1ca0 703b80018a2c1464
+0x000000016dae17d0:   0000000000000000 0000000000000000
+0x000000016dae17e0:   0000000000000000 0000000000000000
+0x000000016dae17f0:   0000000000000000 71f427e2fd7f00ed
+0x000000016dae1800:   000000016bbb2000 000000016b9745f8
+0x000000016dae1810:   0000000000000000 000000016bbcdf70
+0x000000016dae1820:   000000011e765400 000000016bbce258
+0x000000016dae1830:   000000016dae1870 9d0d00016ba308bc
+0x000000016dae1840:   000000016dae1930 000000016dae1b85
+0x000000016dae1850:   000000016ba8857c 0000000000000004
+0x000000016dae1860:   000000011e765400 000000016dae225f
+0x000000016dae1870:   000000016dae1af0 000000016ba2fb50
+0x000000016dae1880:   0000000000000001 0000000000000004
+0x000000016dae1890:   000000010238ca00 0000000102384080
+0x000000016dae18a0:   000000010238f200 0000000000000000
+0x000000016dae18b0:   000000016dae19a0 174580018a243670
+0x000000016dae18c0:   0000000000000001 0000000000000004
+0x000000016dae18d0:   000000010238ca00 0000000102384080
+0x000000016dae18e0:   000000010238f200 0000000000000000
+0x000000016dae18f0:   000000016dae19e0 ad7680018a243670
+0x000000016dae1900:   000000010238ca00 0000000102384080
+0x000000016dae1910:   0000000000004000 000000016dae1a40
+0x000000016dae1920:   00000000000ec000 00000000000ec000
+0x000000016dae1930:   000000016dae1940 131c00016b80fbd8
+0x000000016dae1940:   000000016dae19a0 000000016b80ba9c
+0x000000016dae1950:   000000000753729a 0000000000004000
+0x000000016dae1960:   0000000000000003 000000000008cccc
+0x000000016dae1970:   0000000000000001 0000000102384008
+0x000000016dae1980:   0000000000000000 0000000000000018
+0x000000016dae1990:   0000000000000000 0000000102380000
+0x000000016dae19a0:   000000016dae19e0 b96080018a24224c 
+
+Instructions: (pc=0x000000018a44be64)
+0x000000018a44bd64:   ca000000 d65f03c0 6e211c21 6e213400
+0x000000018a44bd74:   9cfff861 4ea11c00 6e31a800 1e260003
+0x000000018a44bd84:   eb02007f 54fffee2 d1004063 38636804
+0x000000018a44bd94:   38636825 cb050080 d65f03c0 03020100
+0x000000018a44bda4:   07060504 0b0a0908 0f0e0d0c 00000000
+0x000000018a44bdb4:   00000000 00000000 00000000 ea01003f
+0x000000018a44bdc4:   540004e4 54000300 927cec02 3dc00040
+0x000000018a44bdd4:   10fffe63 3cc10462 92400c04 cb040063
+0x000000018a44bde4:   3dc00061 4ea11c00 8b040021 14000005
+0x000000018a44bdf4:   d503201f d503201f d503201f 3cc10c40
+0x000000018a44be04:   6e31a801 1e260023 34000123 f1004021
+0x000000018a44be14:   54ffff68 cb000040 91004021 8b010000
+0x000000018a44be24:   d65f03c0 aa1f03e0 d65f03c0 6e211c21
+0x000000018a44be34:   6e213400 4ea21c00 6e31a801 1e260023
+0x000000018a44be44:   cb000040 eb03003f 9a833021 8b010000
+0x000000018a44be54:   d65f03c0 d503201f d503201f 927cec01
+0x000000018a44be64:   3dc00020 10fff9c3 3cc10462 92400c02
+0x000000018a44be74:   cb020063 3dc00061 4ea11c00 14000005
+0x000000018a44be84:   d503201f d503201f d503201f 3cc10c20
+0x000000018a44be94:   6e31a801 1e260022 35ffffa2 6e211c21
+0x000000018a44bea4:   6e213400 4ea21c00 6e31a801 1e260022
+0x000000018a44beb4:   cb000020 8b020000 d65f03c0 f8bfc008
+0x000000018a44bec4:   92400509 f100053f 54000181 b2704fe9
+0x000000018a44bed4:   f2983009 f9400129 d37ef529 cb080128
+0x000000018a44bee4:   91000508 f100411f 54000063 92800008
+0x000000018a44bef4:   f9000008 d65f03c0 d2800008 d53bd069
+0x000000018a44bf04:   f9400d23 92407c69 c8e87c09 f100011f
+0x000000018a44bf14:   54000041 14000002 14000780 d503237f
+0x000000018a44bf24:   a9be4ff4 a9017bfd 910043fd aa0303f3
+0x000000018a44bf34:   aa0003f4 aa0103e0 d63f085f b2704fe8
+0x000000018a44bf44:   f2983008 f9400108 52800029 b37ef509
+0x000000018a44bf54:   f8698281 6b13003f 54000081 a9417bfd 
+
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000000016bc1a470, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x000000011e765400 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=259, stack(0x000000016bae4000,0x000000016dae4000)]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000000000000, size: 0 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (3 events):
+Event: 0.014 Protecting memory [0x000000016bae4000,0x000000016baf0000] with protection modes 0
+Event: 0.015 Loaded shared library /Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjava.dylib
+Event: 0.016 Protecting memory [0x000000016bae4000,0x000000016bae8000] with protection modes 3
+
+
+Dynamic libraries:
+0x0000000103118000 	/Library/Frameworks/Python.framework/Versions/3.11/Python
+0x000000018a47f000 	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x000000018a07c000 	/usr/lib/libobjc.A.dylib
+0x000000018d529000 	/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
+0x0000000195d79000 	/usr/lib/liboah.dylib
+0x0000000195dac000 	/usr/lib/libfakelink.dylib
+0x000000018cf62000 	/usr/lib/libicucore.A.dylib
+0x0000000195daa000 	/usr/lib/libSystem.B.dylib
+0x0000000195db0000 	/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking
+0x000000018a3c3000 	/usr/lib/libc++abi.dylib
+0x000000018a336000 	/usr/lib/libc++.1.dylib
+0x0000000195da4000 	/usr/lib/system/libcache.dylib
+0x0000000195d60000 	/usr/lib/system/libcommonCrypto.dylib
+0x0000000195d8b000 	/usr/lib/system/libcompiler_rt.dylib
+0x0000000195d81000 	/usr/lib/system/libcopyfile.dylib
+0x000000018a1b5000 	/usr/lib/system/libcorecrypto.dylib
+0x000000018a26c000 	/usr/lib/system/libdispatch.dylib
+0x000000018a426000 	/usr/lib/system/libdyld.dylib
+0x0000000195d9a000 	/usr/lib/system/libkeymgr.dylib
+0x0000000195d3a000 	/usr/lib/system/libmacho.dylib
+0x000000019533f000 	/usr/lib/system/libquarantine.dylib
+0x0000000195d97000 	/usr/lib/system/libremovefile.dylib
+0x000000018f0cf000 	/usr/lib/system/libsystem_asl.dylib
+0x000000018a151000 	/usr/lib/system/libsystem_blocks.dylib
+0x000000018a2b7000 	/usr/lib/system/libsystem_c.dylib
+0x0000000195d8f000 	/usr/lib/system/libsystem_collections.dylib
+0x000000019477e000 	/usr/lib/system/libsystem_configuration.dylib
+0x0000000193814000 	/usr/lib/system/libsystem_containermanager.dylib
+0x0000000195a2e000 	/usr/lib/system/libsystem_coreservices.dylib
+0x000000018d216000 	/usr/lib/system/libsystem_darwin.dylib
+0x0000000195d9b000 	/usr/lib/system/libsystem_dnssd.dylib
+0x000000018a2b4000 	/usr/lib/system/libsystem_featureflags.dylib
+0x000000018a452000 	/usr/lib/system/libsystem_info.dylib
+0x0000000195d02000 	/usr/lib/system/libsystem_m.dylib
+0x000000018a240000 	/usr/lib/system/libsystem_malloc.dylib
+0x000000018f04d000 	/usr/lib/system/libsystem_networkextension.dylib
+0x000000018d680000 	/usr/lib/system/libsystem_notify.dylib
+0x0000000194783000 	/usr/lib/system/libsystem_sandbox.dylib
+0x0000000195d94000 	/usr/lib/system/libsystem_secinit.dylib
+0x000000018a3df000 	/usr/lib/system/libsystem_kernel.dylib
+0x000000018a44b000 	/usr/lib/system/libsystem_platform.dylib
+0x000000018a419000 	/usr/lib/system/libsystem_pthread.dylib
+0x0000000190897000 	/usr/lib/system/libsystem_symptoms.dylib
+0x000000018a19a000 	/usr/lib/system/libsystem_trace.dylib
+0x0000000195d6e000 	/usr/lib/system/libunwind.dylib
+0x000000018a156000 	/usr/lib/system/libxpc.dylib
+0x000000018d5a5000 	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x000000019d142000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x0000000191550000 	/usr/lib/libDiagnosticMessagesClient.dylib
+0x000000018f066000 	/usr/lib/libenergytrace.dylib
+0x0000000195366000 	/usr/lib/libbsm.0.dylib
+0x0000000195cf0000 	/usr/lib/libz.1.dylib
+0x0000000195d40000 	/usr/lib/system/libkxld.dylib
+0x000000018ec89000 	/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x0000000192038000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents
+0x000000018d221000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x0000000191594000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x0000000195a34000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x0000000195f72000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x0000000190819000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x000000018a959000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x000000019723b000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+0x0000000192045000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList
+0x000000018cbb0000 	/System/Library/Frameworks/Security.framework/Versions/A/Security
+0x000000018b0e6000 	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x0000000196010000 	/usr/lib/libapple_nghttp2.dylib
+0x0000000196046000 	/usr/lib/libcompression.dylib
+0x000000018ec85000 	/usr/lib/libnetwork.dylib
+0x00000001904c8000 	/usr/lib/libsqlite3.dylib
+0x000000018b419000 	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x00000001908a0000 	/System/Library/Frameworks/Network.framework/Versions/A/Network
+0x0000000216b93000 	/usr/lib/libCoreEntitlements.dylib
+0x0000000202b4a000 	/System/Library/PrivateFrameworks/MessageSecurity.framework/Versions/A/MessageSecurity
+0x00000001904ae000 	/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer
+0x000000018f068000 	/usr/lib/libMobileGestalt.dylib
+0x000000019595c000 	/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
+0x000000019534e000 	/usr/lib/libcoretls.dylib
+0x00000001972ab000 	/usr/lib/libcoretls_cfhelpers.dylib
+0x0000000196040000 	/usr/lib/libpam.2.dylib
+0x0000000197316000 	/usr/lib/libxar.1.dylib
+0x0000000192076000 	/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout
+0x000000019162c000 	/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x0000000195eea000 	/usr/lib/libarchive.2.dylib
+0x00000001920c0000 	/usr/lib/libxml2.2.dylib
+0x000000019478f000 	/usr/lib/liblangid.dylib
+0x000000019b07c000 	/System/Library/Frameworks/Combine.framework/Versions/A/Combine
+0x000000019912f000 	/usr/lib/swift/libswiftCore.dylib
+0x00000001ad074000 	/usr/lib/swift/libswiftCoreFoundation.dylib
+0x00000001aafe7000 	/usr/lib/swift/libswiftDarwin.dylib
+0x000000019e68d000 	/usr/lib/swift/libswiftDispatch.dylib
+0x00000001ad095000 	/usr/lib/swift/libswiftIOKit.dylib
+0x00000001a0c42000 	/usr/lib/swift/libswiftObjectiveC.dylib
+0x00000001ad088000 	/usr/lib/swift/libswiftXPC.dylib
+0x0000000217aa6000 	/usr/lib/swift/libswift_Concurrency.dylib
+0x0000000217bf4000 	/usr/lib/swift/libswift_StringProcessing.dylib
+0x00000001a0c46000 	/usr/lib/swift/libswiftos.dylib
+0x000000019478b000 	/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/AppleSystemInfo
+0x0000000195042000 	/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer
+0x0000000193846000 	/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface
+0x0000000195db1000 	/usr/lib/libpcap.A.dylib
+0x000000019088d000 	/usr/lib/libdns_services.dylib
+0x0000000197292000 	/usr/lib/liblzma.5.dylib
+0x0000000195a21000 	/usr/lib/libbz2.1.0.dylib
+0x0000000195de6000 	/usr/lib/libiconv.2.dylib
+0x0000000195d39000 	/usr/lib/libcharset.1.dylib
+0x0000000217b44000 	/usr/lib/swift/libswift_RegexParser.dylib
+0x00000001976e5000 	/usr/lib/libheimdal-asn1.dylib
+0x0000000195342000 	/usr/lib/libCheckFix.dylib
+0x000000018f0e7000 	/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
+0x0000000194791000 	/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP
+0x0000000191552000 	/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities
+0x000000019d3f3000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x0000000195378000 	/usr/lib/libmecab.dylib
+0x000000018b170000 	/usr/lib/libCRFSuite.dylib
+0x00000001953d4000 	/usr/lib/libgermantok.dylib
+0x0000000195fe9000 	/usr/lib/libThaiTokenizer.dylib
+0x0000000191635000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x000000019d119000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x000000019735c000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x0000000194f41000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x000000018ad11000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x000000019611b000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x00000001953d7000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib
+0x000000019602b000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib
+0x0000000196116000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib
+0x0000000194886000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib
+0x000000018b07e000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib
+0x0000000201d78000 	/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL
+0x0000000192018000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+0x0000000192008000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory
+0x00000001972ad000 	/System/Library/PrivateFrameworks/APFS.framework/Versions/A/APFS
+0x000000019527d000 	/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x0000000197325000 	/usr/lib/libutil.dylib
+0x0000000200bd2000 	/System/Library/PrivateFrameworks/InstalledContentLibrary.framework/Versions/A/InstalledContentLibrary
+0x000000018d568000 	/System/Library/PrivateFrameworks/CoreServicesStore.framework/Versions/A/CoreServicesStore
+0x000000019206f000 	/usr/lib/libapp_launch_measurement.dylib
+0x00000001f791a000 	/System/Library/PrivateFrameworks/AppleMobileFileIntegrity.framework/Versions/A/AppleMobileFileIntegrity
+0x00000001ad054000 	/usr/lib/libmis.dylib
+0x00000001bb21d000 	/System/Library/PrivateFrameworks/MobileSystemServices.framework/Versions/A/MobileSystemServices
+0x00000001d6756000 	/System/Library/PrivateFrameworks/ConfigProfileHelper.framework/Versions/A/ConfigProfileHelper
+0x0000000191522000 	/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics
+0x0000000195feb000 	/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce
+0x000000018bddf000 	/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling
+0x0000000197329000 	/usr/lib/libxslt.1.dylib
+0x0000000195ed8000 	/usr/lib/libcmph.dylib
+0x000000019502f000 	/System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji
+0x0000000194880000 	/System/Library/PrivateFrameworks/LinguisticData.framework/Versions/A/LinguisticData
+0x000000018b036000 	/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon
+0x000000019530f000 	/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Versions/A/BackgroundTaskManagement
+0x0000000216d36000 	/usr/lib/libTLE.dylib
+0x0000000103b50000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/_core/_multiarray_umath.cpython-311-darwin.so
+0x0000000105238000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/.dylibs/libscipy_openblas64_.dylib
+0x000000010422c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/.dylibs/libgfortran.5.dylib
+0x000000010275c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/.dylibs/libquadmath.0.dylib
+0x0000000102700000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/.dylibs/libgcc_s.1.1.dylib
+0x00000001025c4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/math.cpython-311-darwin.so
+0x0000000102724000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_datetime.cpython-311-darwin.so
+0x00000001025e4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_contextvars.cpython-311-darwin.so
+0x0000000103820000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_struct.cpython-311-darwin.so
+0x00000001027b8000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_pickle.cpython-311-darwin.so
+0x000000010389c000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_ctypes.cpython-311-darwin.so
+0x000000019a300000 	/usr/lib/libffi.dylib
+0x00000001027e4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_typing.cpython-311-darwin.so
+0x0000000103868000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/linalg/_umath_linalg.cpython-311-darwin.so
+0x0000000103100000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_bisect.cpython-311-darwin.so
+0x00000001038cc000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_bz2.cpython-311-darwin.so
+0x0000000103b00000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_lzma.cpython-311-darwin.so
+0x00000001047b4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/bit_generator.cpython-311-darwin.so
+0x000000010c5d4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_common.cpython-311-darwin.so
+0x000000010383c000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/binascii.cpython-311-darwin.so
+0x00000001038e0000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_hashlib.cpython-311-darwin.so
+0x000000010f000000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/libcrypto.1.1.dylib
+0x0000000103ed4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_blake2.cpython-311-darwin.so
+0x0000000103854000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_random.cpython-311-darwin.so
+0x0000000103eec000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_sha512.cpython-311-darwin.so
+0x000000010c6c0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/mtrand.cpython-311-darwin.so
+0x000000010c65c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_bounded_integers.cpython-311-darwin.so
+0x0000000104200000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_mt19937.cpython-311-darwin.so
+0x0000000105200000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_philox.cpython-311-darwin.so
+0x000000010c610000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_pcg64.cpython-311-darwin.so
+0x0000000103ebc000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_sfc64.cpython-311-darwin.so
+0x000000010d8d0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/numpy/random/_generator.cpython-311-darwin.so
+0x0000000103ea4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_opcode.cpython-311-darwin.so
+0x0000000105224000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/pandas_parser.cpython-311-darwin.so
+0x000000010c634000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/pandas_datetime.cpython-311-darwin.so
+0x000000010dbbc000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/interval.cpython-311-darwin.so
+0x000000010f400000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/hashtable.cpython-311-darwin.so
+0x000000010c7a4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/missing.cpython-311-darwin.so
+0x000000010d838000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/dtypes.cpython-311-darwin.so
+0x000000010c7d8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/ccalendar.cpython-311-darwin.so
+0x000000010d800000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/np_datetime.cpython-311-darwin.so
+0x000000010daa4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/conversion.cpython-311-darwin.so
+0x000000010c6a8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/base.cpython-311-darwin.so
+0x000000010df00000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/offsets.cpython-311-darwin.so
+0x000000010dcd8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/timestamps.cpython-311-darwin.so
+0x000000010dae8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/nattype.cpython-311-darwin.so
+0x000000010dd6c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/timedeltas.cpython-311-darwin.so
+0x000000010db24000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/timezones.cpython-311-darwin.so
+0x00000001047e8000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_zoneinfo.cpython-311-darwin.so
+0x000000010db68000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/fields.cpython-311-darwin.so
+0x000000010c648000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/fcntl.cpython-311-darwin.so
+0x000000010d870000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_posixsubprocess.cpython-311-darwin.so
+0x000000010d884000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/select.cpython-311-darwin.so
+0x000000010f380000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/tzconversion.cpython-311-darwin.so
+0x000000010d89c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/properties.cpython-311-darwin.so
+0x000000010f630000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/parsing.cpython-311-darwin.so
+0x000000010f5d0000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_decimal.cpython-311-darwin.so
+0x000000010f6e4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/strptime.cpython-311-darwin.so
+0x000000010f8a8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/period.cpython-311-darwin.so
+0x000000010f3c8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslibs/vectorized.cpython-311-darwin.so
+0x000000010c788000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/ops_dispatch.cpython-311-darwin.so
+0x000000010fab4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/algos.cpython-311-darwin.so
+0x000000010f9cc000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/lib.cpython-311-darwin.so
+0x000000011c248000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/unicodedata.cpython-311-darwin.so
+0x000000010f690000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/ops.cpython-311-darwin.so
+0x000000010f838000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/hashing.cpython-311-darwin.so
+0x000000010f35c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/arrays.cpython-311-darwin.so
+0x000000010c770000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_csv.cpython-311-darwin.so
+0x000000010f338000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/zlib.cpython-311-darwin.so
+0x000000010f964000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/tslib.cpython-311-darwin.so
+0x000000011c36c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/sparse.cpython-311-darwin.so
+0x000000011c428000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/internals.cpython-311-darwin.so
+0x000000010f6c8000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_json.cpython-311-darwin.so
+0x000000010f880000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/indexing.cpython-311-darwin.so
+0x000000011c64c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/index.cpython-311-darwin.so
+0x000000010fc58000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/writers.cpython-311-darwin.so
+0x000000011c818000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/join.cpython-311-darwin.so
+0x000000010d8bc000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/mmap.cpython-311-darwin.so
+0x000000010f868000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/grp.cpython-311-darwin.so
+0x000000011c584000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/window/aggregations.cpython-311-darwin.so
+0x000000010fa80000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/window/indexers.cpython-311-darwin.so
+0x000000010fc90000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/reshape.cpython-311-darwin.so
+0x000000011cfe8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/groupby.cpython-311-darwin.so
+0x000000010f940000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_uuid.cpython-311-darwin.so
+0x000000010f9b0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/json.cpython-311-darwin.so
+0x000000011cf00000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/parsers.cpython-311-darwin.so
+0x000000010fcd0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/pandas/_libs/testing.cpython-311-darwin.so
+0x000000010f918000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/cmath.cpython-311-darwin.so
+0x000000011c5dc000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_socket.cpython-311-darwin.so
+0x000000011c600000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/array.cpython-311-darwin.so
+0x000000011c200000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_ssl.cpython-311-darwin.so
+0x000000011c91c000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/libssl.1.1.dylib
+0x000000011c9a4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_scproxy.cpython-311-darwin.so
+0x000000011d83c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/_jpype.cpython-311-darwin.so
+0x000000011c9b8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/matplotlib/_c_internal_utils.cpython-311-darwin.so
+0x000000011da5c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/_imaging.cpython-311-darwin.so
+0x000000011dba8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libtiff.6.dylib
+0x000000011dc6c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libjpeg.62.4.0.dylib
+0x000000011dd08000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libopenjp2.2.5.2.dylib
+0x000000011cf7c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libz.1.3.1.dylib
+0x000000011da18000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libxcb.1.1.0.dylib
+0x000000011db38000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/liblzma.5.dylib
+0x000000011c634000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libXau.6.0.0.dylib
+0x000000011f100000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/matplotlib/_path.cpython-311-darwin.so
+0x000000011f500000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/matplotlib/ft2font.cpython-311-darwin.so
+0x000000011d800000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/kiwisolver/_cext.cpython-311-darwin.so
+0x000000011cfa8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/_imagingft.cpython-311-darwin.so
+0x000000011f7d8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libfreetype.6.dylib
+0x000000011fa4c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libharfbuzz.0.dylib
+0x000000011f6b0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libpng16.16.dylib
+0x000000011cfc8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libbrotlidec.1.1.0.dylib
+0x000000011dae4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/PIL/.dylibs/libbrotlicommon.1.1.0.dylib
+0x000000011d9d4000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/wordcloud/query_integral_image.cpython-311-darwin.so
+0x000000011ddb4000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/pyexpat.cpython-311-darwin.so
+0x000000011f4a0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/matplotlib/_image.cpython-311-darwin.so
+0x000000011c620000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_heapq.cpython-311-darwin.so
+0x000000011c9e0000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_queue.cpython-311-darwin.so
+0x000000010f898000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/charset_normalizer/md.cpython-311-darwin.so
+0x000000011f70c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/charset_normalizer/md__mypyc.cpython-311-darwin.so
+0x000000011d2d0000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_multibytecodec.cpython-311-darwin.so
+0x000000011f748000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_asyncio.cpython-311-darwin.so
+0x000000011ff98000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/yaml/_yaml.cpython-311-darwin.so
+0x000000010f930000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/markupsafe/_speedups.cpython-311-darwin.so
+0x0000000102750000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libtorch_global_deps.dylib
+0x000000019603e000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders
+0x0000000194702000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore
+0x00000001958d2000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage
+0x00000001953ec000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork
+0x00000001957d4000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix
+0x00000001955e6000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector
+0x0000000195803000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray
+0x00000001f2de9000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSFunctions.framework/Versions/A/MPSFunctions
+0x0000000193868000 	/System/Library/Frameworks/Metal.framework/Versions/A/Metal
+0x000000018abd6000 	/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools
+0x0000000194789000 	/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary
+0x00000001fd211000 	/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libllvm-flatbuffers.dylib
+0x000000019385e000 	/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator
+0x00000001eef8b000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib
+0x00000001fd20d000 	/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerUtils.dylib
+0x00000001f2dfd000 	/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph
+0x00000001a27cf000 	/System/Library/PrivateFrameworks/AppleNeuralEngine.framework/Versions/A/AppleNeuralEngine
+0x00000001d6d33000 	/System/Library/PrivateFrameworks/ANECompiler.framework/Versions/A/ANECompiler
+0x00000001b0ffc000 	/usr/lib/libncurses.5.4.dylib
+0x00000001a1919000 	/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices
+0x000000018d691000 	/usr/lib/libsandbox.1.dylib
+0x00000001921a9000 	/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+0x00000001940a0000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x000000018f531000 	/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x000000018fb78000 	/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x00000001eef98000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x000000018f105000 	/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight
+0x0000000193ba3000 	/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib
+0x00000001907ba000 	/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices
+0x00000001a319d000 	/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator
+0x00000001980db000 	/System/Library/PrivateFrameworks/WatchdogClient.framework/Versions/A/WatchdogClient
+0x000000018bf5b000 	/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay
+0x0000000193a7a000 	/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia
+0x00000001980df000 	/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport
+0x00000001919de000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x000000019811c000 	/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox
+0x00000001906f7000 	/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard
+0x0000000197fa4000 	/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG
+0x00000001976ca000 	/usr/lib/libexpat.1.dylib
+0x0000000198576000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x00000001985a1000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x0000000198689000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x0000000197fea000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x00000001973d8000 	/usr/lib/libate.dylib
+0x000000019862e000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x0000000198625000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x0000000198620000 	/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler
+0x0000000198600000 	/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment
+0x0000000198628000 	/System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay
+0x000000019868f000 	/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore
+0x0000000197c9e000 	/usr/lib/libspindump.dylib
+0x000000018c51c000 	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x00000001f1919000 	/System/Library/Frameworks/ExtensionFoundation.framework/Versions/A/ExtensionFoundation
+0x000000019ee48000 	/System/Library/PrivateFrameworks/CoreTime.framework/Versions/A/CoreTime
+0x0000000197c89000 	/System/Library/PrivateFrameworks/AppServerSupport.framework/Versions/A/AppServerSupport
+0x000000019a034000 	/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata
+0x000000018c07b000 	/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore
+0x0000000193a51000 	/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk
+0x00000001998eb000 	/usr/lib/libAudioStatistics.dylib
+0x00000001ac496000 	/System/Library/PrivateFrameworks/SystemPolicy.framework/Versions/A/SystemPolicy
+0x0000000199b8b000 	/usr/lib/libSMC.dylib
+0x00000001a28bb000 	/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI
+0x0000000198543000 	/usr/lib/libAudioToolboxUtility.dylib
+0x00000001a8116000 	/System/Library/PrivateFrameworks/OSAServicesClient.framework/Versions/A/OSAServicesClient
+0x000000019a042000 	/usr/lib/libperfcheck.dylib
+0x00000001975b5000 	/System/Library/PrivateFrameworks/PlugInKit.framework/Versions/A/PlugInKit
+0x000000019526f000 	/System/Library/PrivateFrameworks/AssertionServices.framework/Versions/A/AssertionServices
+0x000000019746d000 	/usr/lib/libIOReport.dylib
+0x00000001943a4000 	/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage
+0x00000001a1aab000 	/System/Library/PrivateFrameworks/ASEProcessing.framework/Versions/A/ASEProcessing
+0x000000018c339000 	/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText
+0x0000000205bcb000 	/System/Library/PrivateFrameworks/PhotosensitivityProcessing.framework/Versions/A/PhotosensitivityProcessing
+0x0000000197827000 	/System/Library/PrivateFrameworks/GraphVisualizer.framework/Versions/A/GraphVisualizer
+0x00000001fd12e000 	/System/Library/PrivateFrameworks/FontServices.framework/Versions/A/FontServices
+0x000000018e79a000 	/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers
+0x0000000197c47000 	/System/Library/PrivateFrameworks/OTSVG.framework/Versions/A/OTSVG
+0x0000000191d5c000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
+0x0000000197c93000 	/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib
+0x00000001fd12f000 	/System/Library/PrivateFrameworks/FontServices.framework/libXTFontStaticRegistryData.dylib
+0x00000001b7895000 	/usr/lib/swift/libswiftMetal.dylib
+0x00000001aff4d000 	/usr/lib/swift/libswiftsimd.dylib
+0x00000001eefed000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x00000001eefac000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
+0x00000001ef187000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x00000001eefb5000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x00000001eefa9000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib
+0x0000000216d15000 	/usr/lib/libRosetta.dylib
+0x00000001eef92000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
+0x000000020fb94000 	/System/Library/PrivateFrameworks/VideoToolboxParavirtualizationSupport.framework/Versions/A/VideoToolboxParavirtualizationSupport
+0x000000019767e000 	/System/Library/PrivateFrameworks/AppleVA.framework/Versions/A/AppleVA
+0x00000001975f2000 	/usr/lib/libMatch.1.dylib
+0x000000010f954000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/_C.cpython-311-darwin.so
+0x000000016150c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libtorch_python.dylib
+0x00000001027f8000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libtorch.dylib
+0x000000011da04000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libshm.dylib
+0x0000000280000000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libtorch_cpu.dylib
+0x00000001371f0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libc10.dylib
+0x00000001372e0000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/torch/lib/libomp.dylib
+0x000000011d2ec000 	/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload/_multiprocessing.cpython-311-darwin.so
+0x0000000166c4c000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/tokenizers/tokenizers.cpython-311-darwin.so
+0x0000000166a00000 	/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/safetensors/_safetensors_rust.cpython-311-darwin.so
+0x000000011db8c000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjli.dylib
+0x00000001a29f2000 	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x000000018d6e5000 	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x00000001900e7000 	/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x000000018e5f4000 	/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation
+0x00000001f8f73000 	/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore
+0x000000019cd17000 	/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
+0x0000000194062000 	/System/Library/PrivateFrameworks/XCTTargetBootstrap.framework/Versions/A/XCTTargetBootstrap
+0x00000001987b8000 	/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport
+0x000000019883f000 	/System/Library/PrivateFrameworks/UserActivity.framework/Versions/A/UserActivity
+0x000000021102b000 	/System/Library/PrivateFrameworks/WindowManagement.framework/Versions/A/WindowManagement
+0x0000000194068000 	/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG
+0x000000019770b000 	/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices
+0x00000001a080c000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x000000019404a000 	/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation
+0x0000000199750000 	/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x00000001987c3000 	/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore
+0x00000001affe7000 	/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput
+0x0000000193d16000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x000000019cd57000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x0000000191dae000 	/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI
+0x0000000191ffc000 	/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis
+0x0000000195247000 	/System/Library/PrivateFrameworks/MobileKeyBag.framework/Versions/A/MobileKeyBag
+0x0000000198713000 	/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO
+0x000000019992b000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x000000018fc6a000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x000000019869b000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x0000000199ce4000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x0000000199cd8000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy
+0x00000001998ff000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x0000000198659000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI
+0x0000000199c6b000 	/usr/lib/libcups.2.dylib
+0x000000019a050000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+0x000000019a061000 	/System/Library/Frameworks/GSS.framework/Versions/A/GSS
+0x000000019999d000 	/usr/lib/libresolv.9.dylib
+0x0000000197ca3000 	/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal
+0x00000001a0bc4000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib
+0x000000019a0b9000 	/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
+0x00000001f0b26000 	/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio
+0x00000001a8165000 	/System/Library/PrivateFrameworks/AXCoreUtilities.framework/Versions/A/AXCoreUtilities
+0x0000000199877000 	/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession
+0x000000019ae2e000 	/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth
+0x0000000197780000 	/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience
+0x0000000199716000 	/System/Library/PrivateFrameworks/AudioSession.framework/libSessionUtility.dylib
+0x0000000199cf0000 	/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration
+0x000000019dd54000 	/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog
+0x000000019dc94000 	/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth
+0x00000001a0bc5000 	/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
+0x00000001950ce000 	/System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils
+0x00000001fba05000 	/System/Library/PrivateFrameworks/CoreUtilsExtras.framework/Versions/A/CoreUtilsExtras
+0x0000000200a68000 	/System/Library/PrivateFrameworks/IO80211.framework/Versions/A/IO80211
+0x00000001976f0000 	/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation
+0x000000019cd43000 	/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore
+0x000000016b0fc000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/server/libjvm.dylib
+0x000000011f76c000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjimage.dylib
+0x000000011f780000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libinstrument.dylib
+0x000000011fa00000 	/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/lib/libjava.dylib
+
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF8 -ea -Xmx1024m -javaagent:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/org.jpype.jar 
+java_command: <unknown>
+java_class_path (initial): /Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/bin:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/scala-library-2.12.3.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/twitter-text-1.14.7.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/komoran-3.0.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/jhannanum-0.8.4.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/open-korean-text-2.1.0.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/aho-corasick.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/kkma-2.0.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/shineware-common-1.0.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/snakeyaml-1.12.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/shineware-ds-1.0.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/jhannanum-0.8.4.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/lib/python3.11/site-packages/konlpy/java/kkma-2.0.jar:/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_en
+Launcher Type: generic
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MinHeapSize                              = 6815736                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839564                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909338                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909338                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseNUMA                                  = false                                     {product} {ergonomic}
+     bool UseNUMAInterleaving                      = false                                     {product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home
+PATH=/Users/lovelyjoo/Github/Github_joo_loves_/crawling/sentiment_youtube/new_env/bin:/Users/lovelyjoo/opt/anaconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/lovelyjoo/opt/anaconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/bin:/Library/Java/JavaVirtualMachines/zulu-15.jdk/Contents/Home/bin:
+SHELL=/bin/zsh
+LANG=ko_KR.UTF-8
+
+Signal Handlers:
+SIGSEGV: [libjvm.dylib+0x929b50], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_ONSTACK|SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.dylib+0x929b50], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.dylib+0x929b50], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.dylib+0x7143a4], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.dylib+0x7143a4], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.dylib+0x929b50], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR2: [libjvm.dylib+0x714dd8], sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGINT: [Python+0x270b08], sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_ONSTACK
+SIGTERM: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART
+SIGQUIT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART
+
+
+---------------  S Y S T E M  ---------------
+
+OS:uname: Darwin 22.5.0 Darwin Kernel Version 22.5.0: Mon Apr 24 20:53:44 PDT 2023; root:xnu-8796.121.2~5/RELEASE_ARM64_T8103 arm64
+OS uptime: 18 days 5:06 hours
+rlimit (soft/hard): STACK 8176k/65520k , CORE 0k/infinity , NPROC 1333/2000 , NOFILE 10240/infinity , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK infinity/infinity , RSS infinity/infinity
+load average: 5.93 5.41 5.53
+
+CPU: total 8 (initial active 8) 
+
+Memory: 16k page, physical 8388608k(153984k free), swap 8388608k(853696k free)
+
+vm_info: OpenJDK 64-Bit Server VM (15.0.10+5-MTS) for bsd-aarch64 JRE (15.0.10+5-MTS) (Zulu15.46+17-CA), built on Jan  7 2023 09:50:54 by "zulu_re" with clang Apple LLVM 12.0.0 (clang-1200.0.32.28)
+
+END.
