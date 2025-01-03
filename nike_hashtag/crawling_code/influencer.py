@@ -156,17 +156,21 @@ def is_personal_influencer(driver):
         followers_text = followers_element.text
         print(f"[DEBUG] Followers text: {followers_text}")
 
-        # 팔로워 수 계산
-        followers = 0
-        if "만" in followers_text:
-            parts = followers_text.split("만")
-            whole = int(parts[0]) * 10000
-            decimal = int(parts[1]) * 100 if len(parts) > 1 else 0
-            followers = whole + decimal
-        else:
-            followers = int(re.sub(r'[^\d]', '', followers_text))
+        try:
+            followers = 0
+            if "만" in followers_text:
+                parts = followers_text.split("만")
+                # 만 단위 처리: 앞부분과 뒷부분이 비었는지 확인
+                whole = int(parts[0]) * 10000 if parts[0].strip() else 0
+                decimal = int(parts[1]) * 100 if len(parts) > 1 and parts[1].strip() else 0
+                followers = whole + decimal
+            else:
+                # 숫자만 추출하여 처리
+                followers = int(re.sub(r'[^\d]', '', followers_text))
 
-        print(f"Followers count: {followers}")
+            print(f"Followers count: {followers}")
+        except ValueError as e:
+            print(f"[ERROR] Invalid followers_text format: {followers_text}. Error: {e}")
 
         # 5. 팔로워 조건 확인
         if not (1000 <= followers <= 50000):
