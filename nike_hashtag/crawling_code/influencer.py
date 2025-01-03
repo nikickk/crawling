@@ -46,9 +46,13 @@ def login_instagram(driver, username, password):
 
 
 # 공통 유틸 함수
-def wait_for_element(driver, css_selector, timeout=10):
+# def wait_for_element(driver, css_selector, timeout=10):
+#     return WebDriverWait(driver, timeout).until(
+#         EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))
+#     )
+def wait_for_element(driver, selector, timeout=10, by=By.CSS_SELECTOR):
     return WebDriverWait(driver, timeout).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))
+        EC.presence_of_element_located((by, selector))
     )
 def get_post_image_url(driver):
     try:
@@ -97,13 +101,15 @@ def contains_person(image_url):
         return len(faces) > 0
     except Exception as e:
         print(f"Person detection error (Haar Cascade): {e}")
+        # 예외 발생 시 창 닫기
+        cv2.destroyAllWindows()
         return False
 
 def follow_user(driver):
     try:
         # 버튼 요소 찾기
-        follow_button = wait_for_element(driver, '#mount_0_0_\\+A > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div:nth-child(2) > div > div.x1gryazu.xh8yej3.x10o80wk.x14k21rp.x17snn68.x6osk4m.x1porb0y.x8vgawa > section > main > div > header > section > div.x6s0dn4.x78zum5.x1q0g3np.xs83m0k.xeuugli.x1n2onr6.xxz05av.xkfe5hh > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1n2onr6.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.x1q0g3np.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1 > div > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1i64zmx.x1n2onr6.x1plvlek.xryxfnj.x1iyjqo2.x2lwn1j.xeuugli.xdt5ytf.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1 > button')
-    
+        follow_button = wait_for_element(driver, '//*[contains(@id, "mount_0_0")]/div/div/div[2]/div/div/div[1]/div[2]/div/div[1]/section/main/div/header/section/div[1]/div[2]/div/div[1]/button', timeout=10, by=By.XPATH)
+        print("find follow button")
         # 버튼 텍스트 확인 및 클릭
         if follow_button.text.lower() in ["follow", "팔로우"]:
             follow_button.click()
@@ -124,14 +130,26 @@ def is_personal_influencer(driver):
             print("Filtered due to image conditions.")
             print(image_url)
             return False
+        else:
+            print("image url exist")
 
-        # 2. 사용자 이름 클릭하여 계정 페이지로 이동 (새 창에서 열기)
-        username_element = wait_for_element(driver, 'header > div > div > div > a')
-        ActionChains(driver).key_down(Keys.COMMAND).click(username_element).key_up(Keys.COMMAND).perform()
+        try:
+            # 사용자 이름 요소를 XPath로 가져오기
+            username_element = wait_for_element(driver, '/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/span/div/a', timeout=20, by=By.XPATH)
+            
+            # 사용자 계정 URL 가져오기
+            user_profile_url = username_element.get_attribute('href')
+            print(f"[DEBUG] User profile URL: {user_profile_url}")
 
-        # 3. 새 창으로 전환
-        time.sleep(2)  # 새 창 로드 대기
-        driver.switch_to.window(driver.window_handles[-1])  # 새로 열린 창으로 이동
+            # JavaScript로 새 창 열기
+            driver.execute_script(f"window.open('{user_profile_url}', '_blank');")
+            print("[DEBUG] JavaScript로 새 창 열기 완료.")
+            
+            # 3. 새 창으로 전환
+            time.sleep(2)  # 새 창 로드 대기
+            driver.switch_to.window(driver.window_handles[-1])
+        except Exception as e:
+            print(f"사용자 이름 클릭 중 오류: {e}")
 
         # 4. 팔로워 수 가져오기
         followers_element = wait_for_element(driver, 'header section ul li:nth-child(2) a span')
@@ -156,9 +174,10 @@ def is_personal_influencer(driver):
             driver.close()  # 새 창 닫기
             driver.switch_to.window(driver.window_handles[0])  # 원래 창으로 전환
             return False
-
-        # 6. 팔로우 버튼 클릭
-        follow_user(driver)
+        else:
+            print(f"Account meet the follower criteria. Followers: {followers}")
+            # 6. 팔로우 버튼 클릭
+            follow_user(driver)
 
         # 새 창 닫기 및 원래 창으로 복귀
         driver.close()
