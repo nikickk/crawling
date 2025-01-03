@@ -46,10 +46,6 @@ def login_instagram(driver, username, password):
 
 
 # 공통 유틸 함수
-# def wait_for_element(driver, css_selector, timeout=10):
-#     return WebDriverWait(driver, timeout).until(
-#         EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))
-#     )
 def wait_for_element(driver, selector, timeout=10, by=By.CSS_SELECTOR):
     return WebDriverWait(driver, timeout).until(
         EC.presence_of_element_located((by, selector))
