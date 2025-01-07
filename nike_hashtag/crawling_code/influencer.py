@@ -15,8 +15,7 @@ import requests
 from PIL import Image
 import numpy as np
 import cv2
-from io import BytesIO  # 누락된 경우
-
+from io import BytesIO
 
 # Tesseract 경로 설정
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -29,170 +28,117 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
+# 로그인 함수
 def login_instagram(driver, username, password):
     driver.get('https://instagram.com/accounts/login/')
     time.sleep(3)
-    
-    # 사용자명과 비밀번호 입력
     driver.find_element(By.NAME, "username").send_keys(username)
     driver.find_element(By.NAME, "password").send_keys(password)
-    
-    # 로그인 버튼 클릭
     driver.find_element(By.CSS_SELECTOR, "button._acan._acap._acas._aj1-._ap30").click()
-    
-    time.sleep(5)  # 페이지 로드 대기
+    time.sleep(5)
     print("Login successful.")
 
-
-# 공통 유틸 함수
-def wait_for_element(driver, css_selector, timeout=10):
+# 요소 대기 함수
+def wait_for_element(driver, selector, timeout=10, by=By.CSS_SELECTOR):
     return WebDriverWait(driver, timeout).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))
+        EC.presence_of_element_located((by, selector))
     )
+
+# 팔로워 수 계산 함수
+def calculate_followers(followers_text):
+    if "만" in followers_text:
+        parts = followers_text.split("만")
+        whole, decimal = 0, 0
+        if '.' in parts[0]:
+            decimal_parts = parts[0].split('.')
+            whole = int(decimal_parts[0]) * 10000 if decimal_parts[0].strip() else 0
+            decimal = int(decimal_parts[1]) * (10 ** (4 - len(decimal_parts[1]))) if len(decimal_parts) > 1 and decimal_parts[1].strip() else 0
+        else:
+            whole = int(parts[0]) * 10000 if parts[0].strip() else 0
+        return whole + decimal
+    return int(re.sub(r'[^\d]', '', followers_text))
+
+# 게시물 이미지 URL 가져오기
 def get_post_image_url(driver):
     try:
-        img_tag = driver.find_element(By.CSS_SELECTOR, '._aatk .x5yr21d.xu96u03.x10l6tqk.x13vifvy.x87ps6o.xh8yej3')
-        if img_tag:
-            return img_tag.get_attribute("src")
-        else:
-            print("Image not found.")
-            return None
+        img_tag = driver.find_element(By.CSS_SELECTOR, '._aatk img')
+        return img_tag.get_attribute("src") if img_tag else None
     except Exception as e:
         print(f"Error finding image URL: {e}")
         return None
 
-
-def contains_text(image_url):
-    response = requests.get(image_url)
-    image = Image.open(BytesIO(response.content)).convert("RGB")
-    image_np = np.array(image)
-    text = pytesseract.image_to_string(image_np, lang='eng')
-    return len(text.strip()) > 10
-
-def contains_person(image_url):
-    try:
-        # Haar Cascade 로드
-        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-        # 이미지 다운로드 및 전처리
-        response = requests.get(image_url)
-        image = Image.open(BytesIO(response.content)).convert("RGB")
-        image_np = np.array(image)
-        image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
-        gray_image = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
-
-        # 얼굴 탐지
-        faces = face_cascade.detectMultiScale(gray_image, scaleFactor=1.1, minNeighbors=5, minSize=(50, 50))
-        print(f"[DEBUG] Faces detected: {len(faces)} | URL: {image_url}")
-
-        # 디버깅을 위해 이미지 표시
-        for (x, y, w, h) in faces:
-            cv2.rectangle(image_bgr, (x, y), (x + w, y + h), (255, 0, 0), 2)
-
-        cv2.imshow("Detected Faces", image_bgr)
-        cv2.waitKey(2000)
-        cv2.destroyAllWindows()
-
-        return len(faces) > 0
-    except Exception as e:
-        print(f"Person detection error (Haar Cascade): {e}")
-        return False
-
-def follow_user(driver):
-    try:
-        # 버튼 요소 찾기
-        follow_button = wait_for_element(driver, '#mount_0_0_\\+A > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div:nth-child(2) > div > div.x1gryazu.xh8yej3.x10o80wk.x14k21rp.x17snn68.x6osk4m.x1porb0y.x8vgawa > section > main > div > header > section > div.x6s0dn4.x78zum5.x1q0g3np.xs83m0k.xeuugli.x1n2onr6.xxz05av.xkfe5hh > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1n2onr6.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.x1q0g3np.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1 > div > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1i64zmx.x1n2onr6.x1plvlek.xryxfnj.x1iyjqo2.x2lwn1j.xeuugli.xdt5ytf.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1 > button')
-    
-        # 버튼 텍스트 확인 및 클릭
-        if follow_button.text.lower() in ["follow", "팔로우"]:
-            follow_button.click()
-            print("User followed successfully.")
-            time.sleep(2)
-        else:
-            print("Already followed or button not available.")
-    except Exception as e:
-        print(f"Error during follow: {e}")
-
-
-
-def is_personal_influencer(driver):
-    try:
-        # 이미지 URL 확인
-        image_url = get_post_image_url(driver)
-        if not image_url or contains_text(image_url) or not contains_person(image_url):
-            print("Filtered due to image conditions.")
-            return False
-
-           
-
-        # 요소 찾기 
-        username_element = wait_for_element(driver, 'body > div.x1n2onr6.xzkaem6 > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div > div.xb88tzc.xw2csxc.x1odjw0f.x5fp0pe.x1qjc9v5.xjbqb8w.x1lcm9me.x1yr5g0i.xrt01vj.x10y3i5r.xr1yuqi.xkrivgy.x4ii5y1.x1gryazu.x15h9jz8.x47corl.xh8yej3.xir0mxb.x1juhsu6 > div > article > div > div.x1qjc9v5.x972fbf.xcfux6l.x1qhh985.xm0m39n.x9f619.x78zum5.xdt5ytf.x1iyjqo2.x5wqa0o.xln7xf2.xk390pu.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x65f84u.x1vq45kp.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1n2onr6.x11njtxf > div > div > div._aasi > div > header > div._aaqy._aaqz > div._aar0._ad95._aar1 > div.x78zum5 > div > div > span > span')
-
-        # ActionChains 객체 생성    
-        actions = ActionChains(driver)
-
-        # 요소를 우클릭
-        actions.context_click(username_element).perform()
-        time.sleep(1)
-
-        # 새 창에서 링크 열기 위한 키 입력
-        actions.send_keys(Keys.CONTROL + Keys.RETURN).perform()  # Ctrl + Enter
-
-        time.sleep(3)  # 새 창이 열릴 시간을 기다림
-
-
-        # 팔로워 정보 가져오기 (셀레니움 사용)
-        followers_element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, '#mount_0_0_\+A > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div:nth-child(2) > div > div.x1gryazu.xh8yej3.x10o80wk.x14k21rp.x17snn68.x6osk4m.x1porb0y.x8vgawa > section > main > div > header > section > div:nth-child(2) > ul > li:nth-child(3) > div > a > span > span'))
-        )
-        followers_text = followers_element.text if followers_element else "0"
-
-        # 팔로워 수 처리: 만 단위 처리
-        match = re.match(r"([\d]+)(\.(\d+))?만", followers_text)
-        if match:
-            whole_part = int(match.group(1))  # 정수 부분
-            decimal_part = int(match.group(3)) if match.group(3) else 0  # 소수 부분 (없으면 0)
-            followers = (whole_part * 10000) + (decimal_part * 1000)
-        else:
-            followers = int(re.sub(r'[^\d]', '', followers_text))  # 숫자만 추출
-
-        # 조건 체크
-        if not (1000 <= followers <= 50000):
-            print(f"조건에 맞지 않는 계정입니다.\n 팔로워 수: {followers}")
-            driver.back()
-            return False
-
-        follow_user(driver)
-        driver.back()
-        return True
-    except Exception as e:
-        print(f"Error during filtering: {e}")
-        driver.back()
-        return False
-
-
-def select_first(driver):
-    driver.execute_script("window.scrollTo(0, 500);")
-    time.sleep(2)
-    first_post = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "div._aagw"))
-    )
-    first_post.click()
-    time.sleep(3)
-
+# 게시물 이동
 def move_next(driver):
     try:
-        next_button = wait_for_element(driver, 'button._abl-')
+        next_button = wait_for_element(driver, 'div._aaqg._aaqh button._abl-')
         next_button.click()
-        print("[DEBUG] Moved to the next post.")
         time.sleep(3)
     except Exception as e:
         print(f"Error moving to the next post: {e}")
 
+# 메인 로직
+def is_personal_influencer(driver):
+    try:
+        # 1. 게시물 이미지 가져오기
+        image_url = get_post_image_url(driver)
+        if not image_url:
+            print("No image found, skipping post.")
+            return False
+
+        # 2. 사용자 프로필로 이동
+        username_element = wait_for_element(driver, 'header div div span a', timeout=20, by=By.CSS_SELECTOR)
+        user_profile_url = username_element.get_attribute('href')
+        driver.execute_script(f"window.open('{user_profile_url}', '_blank');")
+        driver.switch_to.window(driver.window_handles[-1])
+        time.sleep(2)
+
+        # 3. 팔로워 수 가져오기
+        followers_element = wait_for_element(driver, 'header section ul li:nth-child(2) a span')
+        followers_text = followers_element.text
+        followers = calculate_followers(followers_text)
+        print(f"Followers: {followers}")
+
+        # 4. 조건 확인
+        if 1000 <= followers <= 50000:
+            follow_user(driver)
+            print(f"Qualified account: {followers} followers.")
+        else:
+            print(f"Disqualified account: {followers} followers.")
+        driver.close()
+        driver.switch_to.window(driver.window_handles[0])
+        return True
+    except Exception as e:
+        print(f"Error during influencer validation: {e}")
+        if len(driver.window_handles) > 1:
+            driver.close()
+            driver.switch_to.window(driver.window_handles[0])
+        return False
+
+# 팔로우 함수
+def follow_user(driver):
+    try:
+        follow_button = wait_for_element(driver, 'header section div button', timeout=10)
+        if follow_button.text.lower() in ["follow", "팔로우"]:
+            follow_button.click()
+            print("Followed successfully.")
+            time.sleep(2)
+        else:
+            print("Already following or button not available.")
+    except Exception as e:
+        print(f"Error during follow: {e}")
+
+# 첫 게시물 선택
+def select_first(driver):
+    driver.execute_script("window.scrollTo(0, 500);")
+    time.sleep(2)
+    first_post = wait_for_element(driver, "div._aagw", timeout=10)
+    first_post.click()
+    time.sleep(3)
+
 # 실행
 login_instagram(driver, "influ_encert", "Tkekdehd2@")
-word = input("검색할 내용을 입력해 주세요: ")
-url = f'https://www.instagram.com/explore/tags/{word}/'
+search_word = input("검색할 내용을 입력해 주세요: ")
+url = f'https://www.instagram.com/explore/tags/{search_word}/'
 driver.get(url)
 select_first(driver)
 
