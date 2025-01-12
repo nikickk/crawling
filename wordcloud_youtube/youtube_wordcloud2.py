@@ -34,7 +34,7 @@ stopwords = set([
     '일반인', '팔면', '소비', '먹기', '업체', '몇개', '개비', '신지', '동안', '바보', '무조건',
     '브렌', '나라', '이면', '인식', '처리', '실제', '영상', '안해', '마찬가지', '인터넷', '건가',
     '면티', '사기', '여기', '오지', '다스', '그대로', '누구', '최고', '우시', '유지', '개인',
-    '도대체', '아무', '장가', '품질', '신발', '브랜드'
+    '도대체', '아무', '장가', '신발', '품질'
     
 ])
 
@@ -98,7 +98,7 @@ font_path = "/Users/lovelyjoo/Library/Fonts/AppleSDGothicNeoB.ttf"
 # 워드클라우드 생성
 wordcloud = WordCloud(font_path=font_path, background_color="white", width=800, height=600)
 wordcloud.generate_from_frequencies(word_counts)
-wordcloud.to_file("youtube_wordcloud_output(except_품질_신발_브랜드).png")
+wordcloud.to_file("youtube_wordcloud_output(except_신발_품질).png")
 
 # 워드클라우드 시각화
 plt.figure(figsize=(10, 8))
@@ -112,5 +112,5 @@ plt.rc('font', family=fm.FontProperties(fname=font_path).get_name())  # 그래�
 top_words_df.plot(kind='bar', x='word', y='count', legend=False, figsize=(12, 6), color="skyblue")
 plt.title("Top Words Frequency")
 plt.ylabel("Frequency")
-plt.savefig("youtube_Frequency_output(except_품질_신발_브랜드).png", bbox_inches='tight')
+plt.savefig("youtube_frequency_output(except_신발_품질).png", bbox_inches='tight')
 plt.show()
