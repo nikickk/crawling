@@ -14,8 +14,7 @@ import re
 # 크롬 드라이버 경로 설정
 CHROME_DRIVER_PATH = r"/Users/lovelyjoo/개발/Github/Github_joo_loves_/crawling/influencer_instagram/chromedriver-mac-x64/chromedriver"
 
-
-# 이미지 저장 폴더 (자동생성)
+# 이미지 저장 폴더
 IMAGE_SAVE_PATH = "profile_images"
 os.makedirs(IMAGE_SAVE_PATH, exist_ok=True)
 
@@ -31,15 +30,15 @@ def sanitize_filename(filename):
 def scrape_top_posts(profile_url, profile_name, max_posts=5):
     try:
         driver.get(profile_url)
-        time.sleep(5)  # 초기 대기 시간 (X 버튼 누를시간)
+        time.sleep(5)  # 초기 대기 시간
 
         # 프로필 이미지 URL 추출
-        profile_image_element = WebDriverWait(driver, 10).until(
+        profile_image_element = WebDriverWait(driver, 100).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "img[class*='xpdipgo']"))
         )
         profile_image_url = profile_image_element.get_attribute("src")
 
-        # 이미지 다운로드 (profile_images 폴더에 저장됨)
+        # 이미지 다운로드
         sanitized_name = sanitize_filename(profile_name)
         image_file_name = f"{sanitized_name}.jpg"
         image_file_path = os.path.join(IMAGE_SAVE_PATH, image_file_name)
@@ -72,13 +71,13 @@ def scrape_top_posts(profile_url, profile_name, max_posts=5):
             time.sleep(random.uniform(1, 2))
 
             try:
-                likes_element = WebDriverWait(driver, 10).until(
+                likes_element = WebDriverWait(driver, 100).until(
                     EC.presence_of_element_located((By.XPATH, "//ul/li[1]/span/span"))
                 )
                 likes = likes_element.text
 
                 try:
-                    comments_element = WebDriverWait(driver, 10).until(
+                    comments_element = WebDriverWait(driver, 100).until(
                         EC.presence_of_element_located((By.XPATH, "//ul/li[2]/span/span"))
                     )
                     comments = comments_element.text
@@ -111,12 +110,26 @@ if __name__ == "__main__":
     csv_file_path = r"/Users/lovelyjoo/개발/Github/Github_joo_loves_/crawling/influencer_instagram/influencer_following_with_followers.csv"
     accounts = pd.read_csv(csv_file_path)
 
-    start_index = int(input("몇 번째 행부터 시작할까요? (0부터 시작): "))
+    # 입력: 특정 행들 또는 시작 행 번호
+    user_input = input("크롤링할 행 번호를 입력하세요 (예: 0 또는 01,12,14): ")
+
+    if "," in user_input:
+        # 특정 행들 크롤링
+        row_indices = [int(i.strip()) for i in user_input.split(",") if i.strip().isdigit()]
+    else:
+        # 단일 행 번호부터 시작
+        start_index = int(user_input.strip())
+        row_indices = list(range(start_index, len(accounts)))
 
     output_file = "instagram_scrape_results(final).csv"
     all_profiles_data = []
 
-    for index, row in accounts.iloc[start_index:].iterrows():
+    for index in row_indices:
+        if index >= len(accounts):
+            print(f"Index {index} is out of range. Skipping...")
+            continue
+
+        row = accounts.iloc[index]
         profile_name = row['value']
         profile_url = row['href']
 
