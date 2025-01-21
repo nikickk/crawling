@@ -28,5 +28,5 @@
   
 ## 최종 대시보드
 <div align="center">
-  <img width="500" src="https://github.com/user-attachments/assets/8a5ba0ff-a85d-4abd-9ea5-ab02590a8c6c">
+  <img width="700" src="https://github.com/user-attachments/assets/8a5ba0ff-a85d-4abd-9ea5-ab02590a8c6c">
 </div>
