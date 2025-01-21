@@ -25,3 +25,6 @@
 ## 분석 방향
 - 카테고리별 데이터 및 평판 분석  
 - 광고 데이터 효과 평가 및 전략 제안
+  
+## 최종 대시보드
+<img![image](https://github.com/user-attachments/assets/8a5ba0ff-a85d-4abd-9ea5-ab02590a8c6c)>
