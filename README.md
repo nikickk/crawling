@@ -27,4 +27,6 @@
 - 광고 데이터 효과 평가 및 전략 제안
   
 ## 최종 대시보드
-<img width=300 src=https://github.com/user-attachments/assets/8a5ba0ff-a85d-4abd-9ea5-ab02590a8c6c>
+<div align="center">
+  <img width="500" src="https://github.com/user-attachments/assets/8a5ba0ff-a85d-4abd-9ea5-ab02590a8c6c">
+</div>
